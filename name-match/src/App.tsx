@@ -6,26 +6,24 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = (props: any) => {
+
+  let [value, setValue] = useState("");
+  let [updatedValue, setUpdatedValue] = useState("");
+
   const onFormSubmit = (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formDataObject = Object.fromEntries(formData.entries());
     console.log(formDataObject);
+    setUpdatedValue(value)
   }
-  let [value, setvalue] = useState("");
-  let [updatedValue, setUpdatedValue] = useState("");
 
   const onValueValueChange = (e: any) => {
-    setvalue(e.target.value);
-  }
-
-  const updateValue = (e: any) => {
-    e.preventDefault();
-    setUpdatedValue(value);
+    setValue(e.target.value);
   }
 
   useEffect(() => {
-    setvalue(props.value)
+    setValue(props.value)
   }, [props.value]);
 
   return (
@@ -46,7 +44,7 @@ const App = (props: any) => {
         </Form>
         Fuzzball Ratio:
         {
-          ratio("Fred Flintstone", "hiyyo wyrld")
+          ratio("Fred Flintstone", updatedValue)
         }
       </header>
     </div>
