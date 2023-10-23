@@ -1,23 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {ratio} from "fuzzball";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+const App = (props: any) => {
+  const onFormSubmit = (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formDataObject = Object.fromEntries(formData.entries());
+    console.log(formDataObject);
+  }
+  let [value, setvalue] = useState("");
+  let [updatedValue, setUpdatedValue] = useState("");
+
+  const onValueValueChange = (e: any) => {
+    setvalue(e.target.value);
+  }
+
+  const updateValue = (e: any) => {
+    e.preventDefault();
+    setUpdatedValue(value);
+  }
+
+  useEffect(() => {
+    setvalue(props.value)
+  }, [props.value]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Form onSubmit={onFormSubmit}>
+          <Form.Group className="mb-3" controlId="namesInput.Input1">
+            <Form.Label>Family names</Form.Label>
+            <Form.Control type="text" name="input1" onChange={onValueValueChange}/>
+          </Form.Group>
+          <Button type="submit">
+            Submit
+          </Button>
+          <Form.Group className="mb-3">
+            <Form.Label>Output:</Form.Label>
+            <Form.Control readOnly type="text" name="answer"/>
+          </Form.Group>
+        </Form>
+        Fuzzball Ratio:
+        {
+          ratio("Fred Flintstone", "hiyyo wyrld")
+        }
       </header>
     </div>
   );
