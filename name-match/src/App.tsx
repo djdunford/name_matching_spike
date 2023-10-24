@@ -12,8 +12,17 @@ import '@fontsource/roboto/700.css';
 
 function GivenAndFamilyNames({componentName, setValue}: any) {
 
-  const onValueChange = (e: any) => {
-    setValue(e.target.value);
+  let [givenNames, setGivenNames] = useState("");
+  let [familyNames, setFamilyNames] = useState("");
+
+  const onGivenNamesChange = (e: any) => {
+    setValue((e.target.value + " " + familyNames).trim());
+    setGivenNames(e.target.value);
+  }
+
+  const onFamilyNamesChange = (e: any) => {
+    setValue((givenNames + " " + e.target.value).trim());
+    setFamilyNames(e.target.value);
   }
 
   return (
@@ -25,10 +34,10 @@ function GivenAndFamilyNames({componentName, setValue}: any) {
       </Grid>
       <Grid container spacing={2}>
         <Grid item>
-          <TextField fullWidth label={"Given Names"} onChange={onValueChange} autoComplete={"off"}/>
+          <TextField fullWidth label={"Given Names"} onChange={onGivenNamesChange} autoComplete={"off"}/>
         </Grid>
         <Grid item>
-          <TextField fullWidth label={"Family Names"} autoComplete={"off"}/>
+          <TextField fullWidth label={"Family Names"} onChange={onFamilyNamesChange} autoComplete={"off"}/>
         </Grid>
       </Grid>
     </Box>
@@ -44,6 +53,7 @@ function InputBoxes() {
   let [submittedValue, setSubmittedValue] = useState("");
 
   const onClick = () => {
+    console.log("Setting submitted value:", {cicValue});
     setSubmittedValue(cicValue)
   }
 
