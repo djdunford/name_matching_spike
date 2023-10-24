@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {ratio} from "fuzzball";
 import Button from '@mui/material/Button';
@@ -11,20 +11,16 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 
-function InputBoxes(props: any) {
+function InputBoxes() {
 
   let [value, setValue] = useState("");
-  let [updatedValue, setUpdatedValue] = useState("");
+  let [submittedValue, setSubmittedValue] = useState("");
 
-  const onFormSubmit = () => {
-    setUpdatedValue(value)
+  const onClick = () => {
+    setSubmittedValue(value)
   }
 
-  useEffect(() => {
-    setValue(props.value)
-  }, [props.value]);
-
-  const onValueValueChange = (e: any) => {
+  const onValueChange = (e: any) => {
     setValue(e.target.value);
   }
 
@@ -34,20 +30,20 @@ function InputBoxes(props: any) {
     }}>
       <Grid container spacing={2}>
         <Grid item>
-          <TextField fullWidth label={"CIC Given Names"} onChange={onValueValueChange} autoComplete={"off"}/>
+          <TextField fullWidth label={"CIC Given Names"} onChange={onValueChange} autoComplete={"off"}/>
         </Grid>
         <Grid item>
           <TextField fullWidth label={"CIC Family Names"} autoComplete={"off"}/>
         </Grid>
         <Grid item>
-          <Button variant="contained" onClick={onFormSubmit}>
+          <Button variant="contained" onClick={onClick}>
             Submit
           </Button>
         </Grid>
         <Grid item>
           Fuzzball Ratio:
           {
-            ratio("Fred Flintstone", updatedValue)
+            ratio("Fred Flintstone", submittedValue)
           }
         </Grid>
       </Grid>
