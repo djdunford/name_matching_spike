@@ -4,13 +4,12 @@ import {GivenAndFamilyNames} from "./GivenAndFamilyNames";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import {ratio} from "fuzzball";
+import {FullName} from "./FullName";
 
 export function InputBoxes() {
 
   let [cicValue, setCicValue] = useState("");
   let [bavValue, setBavValue] = useState("");
-  let [hmrcValue, setHmrcValue] = useState("");
-  let [kbvValue, setKbvValue] = useState("");
   let [submittedValue, setSubmittedValue] = useState("");
 
   const onClick = () => {
@@ -21,9 +20,7 @@ export function InputBoxes() {
   return (
     <Box>
       <GivenAndFamilyNames componentName={"CIC"} setValue={setCicValue}/>
-      <GivenAndFamilyNames componentName={"BAV"} setValue={setBavValue}/>
-      <GivenAndFamilyNames componentName={"HMRC"} setValue={setHmrcValue}/>
-      <GivenAndFamilyNames componentName={"KBV"} setValue={setKbvValue}/>
+      <FullName componentName={"BAV"} setValue={setBavValue}/>
       <Box>
         <Grid item>
           <Button variant="contained" onClick={onClick}>
