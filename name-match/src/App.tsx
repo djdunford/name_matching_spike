@@ -4,6 +4,10 @@ import {ratio} from "fuzzball";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 const App = (props: any) => {
 
@@ -30,22 +34,36 @@ const App = (props: any) => {
     <div className="App">
       <header className="App-header">
         <Form onSubmit={onFormSubmit}>
-          <Form.Group className="mb-3" controlId="namesInput.Input1">
-            <Form.Label>Family names</Form.Label>
-            <Form.Control type="text" name="input1" onChange={onValueValueChange}/>
-          </Form.Group>
-          <Button type="submit">
-            Submit
-          </Button>
-          <Form.Group className="mb-3">
-            <Form.Label>Output:</Form.Label>
-            <Form.Control readOnly type="text" name="answer"/>
-          </Form.Group>
+          <Container fluid>
+            <Row>
+              <Col>
+                <FloatingLabel label="CIC Given Names">
+                  <Form.Control type="text" name="cicGivenNames" onChange={onValueValueChange}/>
+                </FloatingLabel>
+              </Col>
+              <Col>
+                <FloatingLabel label="CIC Family Names">
+                  <Form.Control type="text" name="cicFamilyNames"/>
+                </FloatingLabel>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button type="submit">
+                  Submit
+                </Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                Fuzzball Ratio:
+                {
+                  ratio("Fred Flintstone", updatedValue)
+                }
+              </Col>
+            </Row>
+          </Container>
         </Form>
-        Fuzzball Ratio:
-        {
-          ratio("Fred Flintstone", updatedValue)
-        }
       </header>
     </div>
   );
